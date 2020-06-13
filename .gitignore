@@ -1,0 +1,36 @@
+target/
+.mvn/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+src/front/.vscode/
+
+# dependencies
+src/front/node_modules
+src/front/.pnp
+src/front/.pnp.js
+
+# testing
+src/front/coverage
+
+# production
+src/front/build
+
+# misc
+src/front/.DS_Store
+src/front/.env.local
+src/front/.env.development.local
+src/front/.env.test.local
+src/front/.env.production.local
+
+src/front/npm-debug.log*
+src/front/yarn-debug.log*
+src/front/yarn-error.log*
+
+#logs
+/log
