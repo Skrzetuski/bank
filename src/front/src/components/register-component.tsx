@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Button, Alert, Form, FormControl, Card, FormGroup  } from "react-bootstrap";
 
 import AuthService from "../services/auth-service"
-import { Button } from "react-bootstrap";
 
 
 function RegisterComponent(){
@@ -19,15 +19,15 @@ function RegisterComponent(){
         setMessage("")
     }
 
-    function onChangeUsername(e:React.FormEvent<HTMLInputElement>){
+    function onChangeUsername(e:React.ChangeEvent<HTMLInputElement>){
         setUsername(e.currentTarget.value);
     }
 
-    function onChangeEmail(e:React.FormEvent<HTMLInputElement>){
+    function onChangeEmail(e:React.ChangeEvent<HTMLInputElement>){
         setEmail(e.currentTarget.value);
     }
 
-    function onChangePassword(e:React.FormEvent<HTMLInputElement>){
+    function onChangePassword(e:React.ChangeEvent<HTMLInputElement>){
         setPassword(e.currentTarget.value);
     }
 
@@ -40,73 +40,56 @@ function RegisterComponent(){
                 password
                 ).then(res =>{
                     if(res === 201){
-                        setMessage("Uzytkownik zarejestrowany");
+                        setMessage("Użytkownik zarejestrowany");
                         setSuccessful(true);
                     }
                 }, error => {
-                    setMessage("Uzytkownik istnieje");
+                    setMessage("Użytkownik istnieje");
                     setSuccessful(false);
                 })
         }
     }
 
-
-
     
     return(
-        <div className="col-md-12">
-            <div className="card card-container">
-                <form onSubmit={handleRegister}>
-                    {!successful && (
-                        <div>
-                            <div className="form-group">
-                                <label htmlFor="username">Username</label>
-                                <input type="text"
-                                        className="form-cotrol"
-                                        name="username"
-                                        value={username}
-                                        onChange={onChangeUsername}
-                                        required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input type="text"
-                                        className="form-cotrol"
-                                        name="email"
-                                        value={email}
-                                        onChange={onChangeEmail}
-                                        required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Hasło</label>
-                                <input type="password"
-                                        className="form-cotrol"
-                                        name="password"
-                                        value={password}
-                                        onChange={onChangePassword}
-                                        required/>
-                            </div>
-                            <Button type="submit" onClick={registationState}>Zarejestruj</Button>
-                        </div>
+        //<div className="d-flex justify-content-center">
+            <Card style={{width: '26rem'}} >
+                <Card.Body>
+                    <Form onSubmit={handleRegister}>
+                        {!successful && (<div>
+                        <FormGroup controlId="formUsername">
+                        <Form.Label>Username</Form.Label>
+                        <FormControl required defaultValue={username} 
+                                    onChange={onChangeUsername} type="text" 
+                                    placeholder="Wpisz swój nick"/>
                         
-
-                        
-                    )}
-
-                    {message &&(
-                        <div className="form-group">
-                            <div className={successful ? "alert alert-success"
-                                                        : "alert alert-danger"}
-                                                        role="alert">
-                                                            {message}
-
-                            </div>
+                        </FormGroup>
+                        <FormGroup controlId="formEmail">
+                        <Form.Label>Email</Form.Label>
+                        <FormControl required defaultValue={email} 
+                                    onChange={onChangeEmail} type="email" 
+                                    placeholder="Wpisz swój adres email"/>
+                        </FormGroup>
+                        <FormGroup controlId="formPassword">
+                        <Form.Label>Hasło</Form.Label>
+                        <FormControl required defaultValue={password} 
+                                    onChange={onChangePassword} type="password" 
+                                    placeholder="Wpisz silne hasło"/>
+                        </FormGroup>
+                        <Button variant="outline-primary" type="submit" onClick={registationState}>Zarejestruj</Button>{' '}
                         </div>
-                    )}
-                    
-                </form>
-            </div>
-        </div>
+                        )}
+
+                        {message && (<div>
+                            <FormGroup>
+                               <Alert variant={successful? "success" : "danger"}>{message}</Alert>
+                           </FormGroup>
+                           </div>
+                        )}
+                    </Form>
+                </Card.Body>
+            </Card>
+        //</div>
     )
 }
 

@@ -10,7 +10,8 @@ class AuthService {
             password
         }).then(res => {
             if(res.status === 200){
-                localStorage.setItem("user", JSON.stringify(res.headers["Authorization"]));
+                console.log(res.headers)
+                localStorage.setItem("user", res.headers["authorization"]);
             }
             return res.status;
         })
@@ -31,7 +32,7 @@ class AuthService {
     }
 
     getUser(){
-        return JSON.parse(localStorage.getItem("user") || "{}");
+        return localStorage.getItem("user");
     }
 
 }
