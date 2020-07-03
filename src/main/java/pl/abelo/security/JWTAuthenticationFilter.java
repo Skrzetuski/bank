@@ -72,7 +72,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) {
-
         String email = ((User) auth.getPrincipal()).getUsername();
         Account account = accountRepository.findByEmail(email);
 
@@ -83,6 +82,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(Date.from(LocalDateTime.now()
                         .plusDays(JWTConstants.EXPIRATION_TIME.getExpirationTime()).toInstant(ZoneOffset.ofHours(2))))
                 .sign(HMAC512(SECRET.getBytes()));
+        res.addHeader("Access-Control-Expose-Headers", "Authorization");
         res.addHeader(JWTConstants.HEADER_STRING.get(), JWTConstants.TOKEN_PREFIX.get() + token);
     }
 }
