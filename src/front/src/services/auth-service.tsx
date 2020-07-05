@@ -21,9 +21,9 @@ class AuthService {
         localStorage.removeItem("user");
     }
 
-    async register(username: String, email: String, password:String): Promise<any>{
+    async register(name: String, email: String, password:String): Promise<any>{
         return axios.post(API_URL + "register",{
-            username,
+            name,
             email,
             password 
         }).then(res => {
