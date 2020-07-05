@@ -17,12 +17,12 @@ import java.util.ArrayList;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
-        super(authManager);
-    }
+    private final String SECRET;
 
-    @Value("${jwt.secret}")
-    private static String SECRET;
+    public JWTAuthorizationFilter(String SECRET, AuthenticationManager authManager) {
+        super(authManager);
+        this.SECRET = SECRET;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest req,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Route, Link, Switch, BrowserRouter } from 'react-router-dom';
+import {Route, Switch, BrowserRouter } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
 import Register from "./components/register-component";
@@ -41,9 +41,9 @@ const App = () => {
 
             {user ? (
                 <>
-                <Nav.Link><Link className="text-white" to="/dashboard">Pulpit</Link></Nav.Link>
-                <Nav.Link><Link className="text-white" to="/transfer">Przelew</Link></Nav.Link>
-                <Nav.Link><Link className="text-white" to="/info">Informacje</Link></Nav.Link>
+                <Nav.Link href="/dashboard" className="text-white">Pulpit</Nav.Link>
+                <Nav.Link href="/transfer" className="text-white">Przelew</Nav.Link>
+                <Nav.Link href="/info" className="text-white">Informacje</Nav.Link>
 
                 <Nav className=" my-2 my-lg-0">
                   <Nav.Link href="/login" onClick={logout} >Wyloguj</Nav.Link>
